@@ -9,7 +9,7 @@ struct Args {
     #[arg(
         short = 'c',
         long = "config",
-        help = "Path to config file for vToD daemon"
+        help = "Path to config file for phoeniceus daemon"
     )]
     config: String,
 }
