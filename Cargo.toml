@@ -1,0 +1,19 @@
+[package]
+name = "phoeniceus"
+version = "0.1.0"
+edition = "2021"
+description = "Modern TCP/UDP implementation of RFC868"
+license = "MIT"
+repository = "https://github.com/EastonVelocity/phoeniceus"
+keywords = ["rfc868", "tod", "time", "network"]
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+time = { version = "0.3.36", features = ["macros"] }
+tokio = { version = "1.37.0", features = ["io-util", "macros", "net", "rt-multi-thread"] }
+toml = "0.8.12"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["tracing"] }
