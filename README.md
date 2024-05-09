@@ -1,5 +1,5 @@
 # Phoeniceus
-A modern implementation of RFC868 inspired by [timed-rs](https://github.com/yanorei32-timedrs) and the death of xinetd in RHEL (and alike) systems. 
+A modern implementation of RFC868 inspired by [timed-rs](https://github.com/yanorei32/timed-rs) and the death of xinetd in RHEL (and alike) systems. 
 This implementation will listen for TCP, UDP, or a mix of both connection types.
 
 # Configuration
