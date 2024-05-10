@@ -2,6 +2,8 @@
 A modern implementation of RFC868 inspired by [timed-rs](https://github.com/yanorei32/timed-rs) and the death of xinetd in RHEL (and alike) systems. 
 This implementation will listen for TCP, UDP, or a mix of both connection types.
 
+The name of the project is based on the scientific name of the Red-winged Blackbird. :)
+
 # Configuration
 The application requires a TOML-based config file including the following options:
 ```
@@ -30,7 +32,7 @@ port = 1037
 Usage: phoeniceus --config <CONFIG>
 
 Options:
-  -c, --config <CONFIG>  Path to config file for vToD daemon
+  -c, --config <CONFIG>  Path to config file for phoeniceus daemon
   -h, --help             Print help
 ```
 
