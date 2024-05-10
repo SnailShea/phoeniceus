@@ -1,4 +1,6 @@
 # Phoeniceus
+![GitHub License](https://img.shields.io/github/license/EastonVelocity/phoeniceus) ![Crates.io Version](https://img.shields.io/crates/v/phoeniceus) 
+
 A modern implementation of RFC868 inspired by [timed-rs](https://github.com/yanorei32/timed-rs) and the death of xinetd in RHEL (and alike) systems. 
 This implementation will listen for TCP, UDP, or a mix of both connection types.
 
