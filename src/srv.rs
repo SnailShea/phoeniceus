@@ -9,7 +9,6 @@ use tokio::{
     join,
     net::{TcpListener, UdpSocket}
 };
-
 use tracing::{error, info};
 
 fn rfc868_now() -> i32 {
@@ -43,7 +42,6 @@ impl TimeServerSpawner {
         }        
     }
 }
-
 
 pub struct UDPTimeServer(UdpSocket);
 impl UDPTimeServer {
