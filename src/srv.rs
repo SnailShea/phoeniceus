@@ -6,8 +6,10 @@ use time::{
 };
 use tokio::{
     io::AsyncWriteExt,
+    join,
     net::{TcpListener, UdpSocket}
 };
+
 use tracing::{error, info};
 
 fn rfc868_now() -> i32 {
@@ -18,10 +20,34 @@ fn rfc868_now() -> i32 {
     seconds
 }
 
+pub struct TimeServerSpawner;
+impl TimeServerSpawner {
+    pub async fn spawn(mode: &str, bind: &str) {
+        if mode == "UDP" {
+            let listener = UDPTimeServer::new(&bind).await;
+            info!("Listening for UDP connections on {bind}");
+            let _ = listener.listen().await;
+    
+        } else if mode == "TCP" {
+            let listener = TCPTimeServer::new(&bind).await;
+            info!("Listening for TCP connections on {bind}");
+            let _ = listener.listen().await;
+        } else {
+            let tcp_listener = TCPTimeServer::new(&bind).await;
+            let udp_listener = UDPTimeServer::new(&bind).await;
+            info!("Listening for TCP and UDP connections on {bind}");
+            let _ = join!(
+                tcp_listener.listen(),
+                udp_listener.listen()
+            );
+        }        
+    }
+}
+
 
 pub struct UDPTimeServer(UdpSocket);
 impl UDPTimeServer {
-    pub async fn new(bind_host: &str) -> UDPTimeServer {
+    async fn new(bind_host: &str) -> UDPTimeServer {
         let listener = UdpSocket::bind(&bind_host).await;
         if listener.is_err() {
             error!("Unable to bind to UDP socket at {bind_host}");
@@ -31,7 +57,7 @@ impl UDPTimeServer {
         }
     }
 
-    pub async fn listen(&self) {
+    async fn listen(&self) {
         loop {
             let mut buf: [u8; 0] = [];
             let received = self.0.recv_from(&mut buf).await;
@@ -50,9 +76,9 @@ impl UDPTimeServer {
     }
 }
 
-pub struct TCPTimeServer(TcpListener);
+struct TCPTimeServer(TcpListener);
 impl TCPTimeServer {
-    pub async fn new(bind_host: &str) -> TCPTimeServer {
+    async fn new(bind_host: &str) -> TCPTimeServer {
         let listener = TcpListener::bind(bind_host).await;
         if listener.is_err() {
             error!("Unable to bind to TCP socket at {bind_host}");
@@ -62,7 +88,7 @@ impl TCPTimeServer {
         }
     }
 
-    pub async fn listen(&self) {
+    async fn listen(&self) {
         loop {
             let client = self.0.accept().await;
             if client.is_ok() {

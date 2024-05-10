@@ -1,3 +1,4 @@
+use clap::Parser;
 use std::fs::read_to_string;
 use std::net::IpAddr;
 use std::process::exit;
@@ -5,6 +6,16 @@ use toml::{from_str, Table};
 use tracing::error;
 
 const VALID_MODES: [&str; 3] = ["TCP", "UDP", "BOTH"];
+
+#[derive(Debug, Parser)]
+pub struct Args {
+    #[arg(
+        short = 'c',
+        long = "config",
+        help = "Path to config file for phoeniceus daemon"
+    )]
+    pub config: String,
+}
 
 pub struct TimeConfig {
     pub mode: String,
