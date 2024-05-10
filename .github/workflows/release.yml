@@ -1,0 +1,34 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update packages
+        run: sudo apt update -y
+      - name: Install cross-compile linker
+        run: sudo apt install -y gcc-mingw-w64
+      - name: Add windows target
+        run: rustup target add x86_64-pc-windows-gnu
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Create release directories
+        run: mkdir -p target/{linux,windows}
+      - name: Build for GNU/Linux
+        run: cargo build --verbose --profile release --target-dir target/linux
+      - name: Build for Windows
+        run: cargo build --verbose --profile release --target x86_64-pc-windows-gnu --target-dir target/windows
+      - name: Create github release and attach assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            target/linux/release/phoeniceus
+            target/windows/x86_64-pc-windows-gnu/release/phoeniceus.exe
