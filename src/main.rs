@@ -10,7 +10,7 @@ async fn main() {
     let config = TimeConfig::new(path);
     let mode = config.mode;
     let bind = config.bind;
-    let _spawner = TimeServerSpawner::spawn(&mode, &bind);
+    let _spawner = TimeServerSpawner::spawn(&mode, &bind).await;
 }
 
 pub mod conf;
