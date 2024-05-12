@@ -1,6 +1,6 @@
 use clap::Parser;
 use conf::{Args, TimeServerConfig};
-use srv::TimeServerSpawner;
+use net::TimeServerSpawner;
 
 #[tokio::main]
 async fn main() {
@@ -12,4 +12,5 @@ async fn main() {
 }
 
 pub mod conf;
-pub mod srv;
+pub mod net;
+pub mod time;

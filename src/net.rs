@@ -1,9 +1,5 @@
 use std::process::exit;
-use time::{
-    macros::{date, time},
-    OffsetDateTime,
-    UtcOffset
-};
+use crate::time::rfc868_now;
 use tokio::{
     io::AsyncWriteExt,
     join,
@@ -11,13 +7,8 @@ use tokio::{
 };
 use tracing::{error, info};
 
-fn rfc868_now() -> i32 {
-    let offset = UtcOffset::UTC;
-    let base_time = OffsetDateTime::new_in_offset(date!(1900 - 01 - 01), time!(0:00), offset);
-    let now = OffsetDateTime::now_utc();
-    let seconds = (now - base_time).whole_seconds() as i32;
-    seconds
-}
+// todo: TCP/UDP/Mixed traits for TimeServerSpawner
+// todo: Fd/Bind traits for 
 
 pub struct TimeServerSpawner;
 impl TimeServerSpawner {

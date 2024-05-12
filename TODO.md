@@ -1,0 +1,3 @@
+- Give TimeServerSpawner Udp/Tcp/Mixed traits
+- Give TimeServerSpawner FromBind/FromFd traits
+- Move everything but main to library

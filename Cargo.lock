@@ -296,6 +296,7 @@ name = "phoeniceus"
 version = "0.1.3"
 dependencies = [
  "clap",
+ "sd-listen-fds",
  "time",
  "tokio",
  "toml",
@@ -338,6 +339,12 @@ name = "rustc-demangle"
 version = "0.1.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "719b953e2095829ee67db738b3bfa9fa368c94900df327b3f07fe6e794d2fe1f"
+
+[[package]]
+name = "sd-listen-fds"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8bb51d45a99c1bafff550fd40ce1d2152917dc9908fb3090c283e3f058d39b3f"
 
 [[package]]
 name = "serde"
